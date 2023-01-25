@@ -169,7 +169,8 @@ public class AddressBook {
             int choose_AddressBook = sc.nextInt();
             System.out.println(
                     "Enter 1 to add contact \nEnter 2 to edit details of contacts \nEnter 3 for deleting contact \nEnter 4 for showing details of contacts \nEnter 5 Search by city or state" +
-                            "\nEnter 6 search person from addressbook \nEnter 7 get count by city or state");
+                            "\nEnter 6 search person from addressbook \nEnter 7 get count by city or state" +
+                            "\nEnter 8 sort by name \n Enter 9 sort by city \nEnter 10 sort ny state");
             int userChoice = sc.nextInt();
             switch (userChoice) {
                 case 1:
@@ -242,6 +243,13 @@ public class AddressBook {
                     break;
                 case 8:
                     sortByName();
+                    break;
+                case 9:
+                    sortByCity();
+                    break;
+                case 10:
+                    sortByState();
+                    break;
                 default:
                     System.out.println("Invalid Input");
                     break;
@@ -251,5 +259,13 @@ public class AddressBook {
 
     private static void sortByName() {
         Collections.sort(contact_Details,Sort.compareFirstName);
+    }
+
+    private static void sortByCity() {
+        Collections.sort(contact_Details,Sort.compareCity);
+    }
+
+    private static void sortByState() {
+        Collections.sort(contact_Details,Sort.compareCity);
     }
 }
