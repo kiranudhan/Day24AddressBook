@@ -85,6 +85,23 @@ public class AddressBook {
         }
     }
 
+    public void searchByCityOrState(){
+        System.out.println("Enter 1 for searching by the city \n Enter 2 for searching by state ");
+        int input = sc.nextInt();
+        if(input == 1){
+            System.out.println("Enter city name for search contacts");
+            String city = sc.next();
+            contact_Details.stream().filter(contact -> contact.getCity().equalsIgnoreCase(city)).forEach(contact ->
+                    System.out.println(contact));
+        }else if(input == 2) {
+            System.out.println("Enter state name to search contact");
+            String state = sc.next();
+            contact_Details.stream().filter(contact -> contact.getState().equalsIgnoreCase(state)).forEach(contact ->
+                    System.out.println(contact));
+        }
+
+    }
+
     public void showContacts() {
         int i = 1;
         for (Contact contact : contact_Details) {
@@ -108,7 +125,7 @@ public class AddressBook {
             System.out.println("Enter 1 to for AddressBook1 2 for AddressBook2 and 3 for AddressBook3");
             int choose_AddressBook = sc.nextInt();
             System.out.println(
-                    "Enter 1 to add contact \nEnter 2 to edit details of contacts \nEnter 3 for deleting contact \nEnter 4 for showing details of contacts");
+                    "Enter 1 to add contact \nEnter 2 to edit details of contacts \nEnter 3 for deleting contact \nEnter 4 for showing details of contacts \nEnter 5 Search by city or state");
             int userChoice = sc.nextInt();
             switch (userChoice) {
                 case 1:
@@ -166,6 +183,17 @@ public class AddressBook {
                         break;
                     } else if (choose_AddressBook == 3) {
                         book3.showContacts();
+                        break;
+                    }
+                case 5:
+                    if (choose_AddressBook == 1) {
+                        book1.searchByCityOrState();
+                        break;
+                    } else if (choose_AddressBook == 2) {
+                        book2.searchByCityOrState();
+                        break;
+                    } else if (choose_AddressBook == 3) {
+                        book3.searchByCityOrState();
                         break;
                     }
 
