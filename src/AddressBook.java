@@ -1,12 +1,9 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class AddressBook {
     static HashMap<String, AddressBook> addressBooks = new HashMap<>();
-    ArrayList<Contact> contact_Details = new ArrayList<>();
+    static ArrayList<Contact> contact_Details = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
 
 
@@ -243,10 +240,16 @@ public class AddressBook {
                 case 7:
                     searchNumberOfPerson();
                     break;
+                case 8:
+                    sortByName();
                 default:
                     System.out.println("Invalid Input");
                     break;
             }
         }
+    }
+
+    private static void sortByName() {
+        Collections.sort(contact_Details,Sort.compareFirstName);
     }
 }
