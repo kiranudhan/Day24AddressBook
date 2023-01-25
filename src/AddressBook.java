@@ -9,6 +9,16 @@ public class AddressBook {
     ArrayList<Contact> contact_Details = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
 
+
+    private static void searchPerson(String first_Name) {
+        for (Map.Entry<String, AddressBook> entry : addressBooks.entrySet()) {
+            System.out.println(entry.getKey());
+            Stream<Contact> search = entry.getValue().contact_Details.stream()
+                    .filter(i -> i.getFirstname().equals(first_Name));
+            search.forEach(str -> System.out.println(str.toString()));
+        }
+    }
+
     public void addContacts() {
         try {
             Scanner sc = new Scanner(System.in);
@@ -85,19 +95,28 @@ public class AddressBook {
         }
     }
 
-    public void searchByCityOrState(){
+    public static void searchByCityOrState(){
         System.out.println("Enter 1 for searching by the city \n Enter 2 for searching by state ");
         int input = sc.nextInt();
         if(input == 1){
             System.out.println("Enter city name for search contacts");
             String city = sc.next();
-            contact_Details.stream().filter(contact -> contact.getCity().equalsIgnoreCase(city)).forEach(contact ->
-                    System.out.println(contact));
+            for (Map.Entry<String, AddressBook> entry : addressBooks.entrySet()) {
+                System.out.println(entry.getKey());
+                Stream<Contact> search = entry.getValue().contact_Details.stream()
+                        .filter(i -> i.getCity().equals(city));
+                search.forEach(str -> System.out.println(str.toString()));
+            }
+
         }else if(input == 2) {
             System.out.println("Enter state name to search contact");
             String state = sc.next();
-            contact_Details.stream().filter(contact -> contact.getState().equalsIgnoreCase(state)).forEach(contact ->
-                    System.out.println(contact));
+            for (Map.Entry<String, AddressBook> entry : addressBooks.entrySet()) {
+                System.out.println(entry.getKey());
+                Stream<Contact> search = entry.getValue().contact_Details.stream()
+                        .filter(i -> i.getState().equals(state));
+                search.forEach(str -> System.out.println(str.toString()));
+            }
         }
 
     }
@@ -125,7 +144,8 @@ public class AddressBook {
             System.out.println("Enter 1 to for AddressBook1 2 for AddressBook2 and 3 for AddressBook3");
             int choose_AddressBook = sc.nextInt();
             System.out.println(
-                    "Enter 1 to add contact \nEnter 2 to edit details of contacts \nEnter 3 for deleting contact \nEnter 4 for showing details of contacts \nEnter 5 Search by city or state");
+                    "Enter 1 to add contact \nEnter 2 to edit details of contacts \nEnter 3 for deleting contact \nEnter 4 for showing details of contacts \nEnter 5 Search by city or state" +
+                            "\nEnter 6 search person from addressbook");
             int userChoice = sc.nextInt();
             switch (userChoice) {
                 case 1:
@@ -186,16 +206,13 @@ public class AddressBook {
                         break;
                     }
                 case 5:
-                    if (choose_AddressBook == 1) {
-                        book1.searchByCityOrState();
-                        break;
-                    } else if (choose_AddressBook == 2) {
-                        book2.searchByCityOrState();
-                        break;
-                    } else if (choose_AddressBook == 3) {
-                        book3.searchByCityOrState();
-                        break;
-                    }
+                    searchByCityOrState();
+                    break;
+                case 6:
+                    System.out.println("Enter firstname : ");
+                    String s = sc.next();
+                    searchPerson(s);
+                    break;
 
                 default:
                     System.out.println("Invalid Input");
